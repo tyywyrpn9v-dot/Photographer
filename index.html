@@ -1,31 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#f6f3ed">
-<title>iPhone 18 Pro 攝影參數指南</title>
-<link rel="stylesheet" href="style.css">
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><meta name="theme-color" content="#f5f3ee">
+<title>iPhone 18 Pro 攝影參數指南</title><link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header class="hero">
-  <div class="eyebrow">📷 iPHONE 18 PRO · CAMERA GUIDE</div>
-  <h1>拍攝場景參數指南</h1>
-  <p>選擇場景，即時查看建議參數、調校原因與注意事項。</p>
-  <div class="search-wrap"><span>🔎</span><input id="search" placeholder="搜尋場景，例如：夜景、流水、人像…"></div>
-</header>
-<main>
-  <section class="section-head"><div><h2>拍攝場景</h2><p id="count"></p></div></section>
-  <section id="sceneGrid" class="scene-grid"></section>
+<header class="hero"><div class="hero-inner">
+<div class="eyebrow">📱 iPHONE 18 PRO · FIELD GUIDE</div><h1>攝影參數指南</h1><p>面對不同場景，快速找到應該點較相機。</p>
+<div class="search-wrap"><span>🔎</span><input id="searchInput" type="search" placeholder="搜尋場景、參數，例如：夜景／水／人像／快門"></div>
+</div></header>
+<main class="container">
+<section class="quick-nav"><div class="section-top"><div><h2>📌 快速選擇</h2><p>首頁提供常用場景；亦可自行建立「我的最愛」。</p></div><span id="resultCount" class="count-badge">0 個場景</span></div>
+<div class="filter-chips"><button class="filter-chip active" data-filter="all">📚 全部場景</button><button class="filter-chip" data-filter="common">⭐ 常用場景</button><button class="filter-chip" data-filter="favorites">❤️ 我的最愛 <span id="favoriteCount">0</span></button></div></section>
+<section><div class="section-top"><div><h2>拍攝場景</h2><p>點擊場景查看「一眼睇晒」、完整參數及注意事項。</p></div></div><div id="sceneGrid" class="scene-grid"></div></section>
 </main>
-<div id="modal" class="modal hidden">
-  <div class="backdrop" data-close></div>
-  <article class="modal-card">
-    <button class="close" data-close aria-label="關閉">×</button>
-    <div id="detail"></div>
-  </article>
-</div>
-<footer>iPhone 18 Pro Camera Guide · GitHub Pages Ready</footer>
+<div id="modalBackdrop" class="modal-backdrop"><div class="modal" role="dialog" aria-modal="true"><button id="closeModal" class="close-modal" aria-label="關閉">×</button><div id="modalContent"></div></div></div>
+<footer><p>iPhone 18 Pro 攝影參數指南 · GitHub Pages Ready</p><p class="footer-note">「我的最愛」只儲存在目前瀏覽器，不會上傳個人資料。</p></footer>
 <script src="app.js"></script>
-</body>
-</html>
+</body></html>
