@@ -1,0 +1,11 @@
+let scenes=[],filtered=[];
+const grid=document.querySelector('#sceneGrid'), search=document.querySelector('#search'), count=document.querySelector('#count'), modal=document.querySelector('#modal'), detail=document.querySelector('#detail');
+fetch('scenes.json').then(r=>r.json()).then(data=>{scenes=data;render(scenes)}).catch(()=>{grid.innerHTML='<p>無法載入 scenes.json，請確認檔案與 index.html 在同一資料夾。</p>'});
+function render(list){filtered=list;count.textContent=`共 ${list.length} 個場景`;grid.innerHTML=list.map(s=>`<button class="scene-card" data-id="${s.id}"><div class="icon">${s.title.split(' ')[0]}</div><h3>${s.title.substring(s.title.indexOf(' ')+1)}</h3></button>`).join('');document.querySelectorAll('.scene-card').forEach(b=>b.onclick=()=>openScene(b.dataset.id))}
+function table(rows){return `<div class="table-wrap"><table class="param-table"><thead><tr><th>🎛️ 參數</th><th>是否必須</th><th>建議設定</th><th>💡 調校原因</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td class="required">✓</td><td>${r[1]}</td><td class="why">${r[2]}</td></tr>`).join('')}</tbody></table></div>`}
+function goodTable(rows){return `<div class="table-wrap"><table class="param-table"><thead><tr><th>🎛️ 參數</th><th>是否必須</th><th>建議設定</th><th>💡 調校原因</th></tr></thead><tbody>${rows.map(r=>`<tr><td>${r[0]}</td><td>Good to have</td><td>${r[1]}</td><td class="why">${r[2]}</td></tr>`).join('')}</tbody></table></div>`}
+function openScene(id){const s=scenes.find(x=>x.id===id);if(!s)return;detail.innerHTML=`<div class="detail-title"><h2>${s.title}</h2><p>以下設定以「先拍到穩定、自然、可後期」為原則。</p></div><section class="param-section"><h3>✅ 必須部分</h3>${table(s.must)}</section><section class="param-section"><h3>✨ Good to have 部分</h3>${goodTable(s.good)}</section><section class="param-section"><h3>⚠️ 注意事項</h3><ul class="notes">${s.notes.map(n=>`<li>${n}</li>`).join('')}</ul></section>`;modal.classList.remove('hidden');document.body.style.overflow='hidden'}
+function closeModal(){modal.classList.add('hidden');document.body.style.overflow=''}
+document.querySelectorAll('[data-close]').forEach(x=>x.addEventListener('click',closeModal));
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+search.addEventListener('input',e=>{const q=e.target.value.trim().toLowerCase();render(scenes.filter(s=>(s.title+' '+JSON.stringify(s)).toLowerCase().includes(q)))});
